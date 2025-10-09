@@ -39,46 +39,56 @@ const displayAllPets = (pets) => {
     petsContainer.innerHTML = "";
 
     if (!pets || pets.length == 0) {
-        petsContainer.innerHTML = `<p class="text-center text-lg mt-10">No Information Available</p>`;
+        petsContainer.innerHTML = `  <div class="grid p-20 text-center space-y-5 bg-[#b6e0e3a1] w-[900px] hover:bg-[#0e7a81a1]  container mx-auto rounded-2xl shadow-2xl ">
+            <img class="mx-auto" src="./images/error.webp" alt="">
+            <h1 class="font-bold text-4xl ">No Information Available</h1>
+            <p>It is a long established fact that a reader will be distracted by the readable content of a page when
+                looking at <br>
+                its layout. The point of using Lorem Ipsum is that it has a.</p>
+
+        </div>`;
         return;
     }
-
+    // pet image container 
     const petImageContainer = document.getElementById("pet-image-container");
 
     pets.forEach((pet) => {
         const petCard = document.createElement("div");
-        petCard.classList.add("p-5", "shadow-xl", "rounded-lg", "border-2", "hover:shadow-2xl", "transition", "duration-300");
+
         petCard.innerHTML = `
-            <div>
+            <div class="p-5 shadow-xl rounded-lg border-2 hover:shadow-2xl transition duration-300 hover:-translate-y-2 relative hover:bg-[#84e8efa1] ">
                 <img src="${pet.image}" alt="" class="rounded-lg w-full h-48 object-cover">
                 <h1 class="font-bold text-2xl mt-3 mb-3">${pet.breed ? pet.breed : "No Name Found"}</h1>
                 <p>Breed: ${pet.breed ? pet.breed : "No Name Found"}</p>
                 <p>Birth: ${pet.date_of_birth ? pet.date_of_birth : "No Birth Info"}</p>
                 <p>Gender: ${pet.gender ? pet.gender : "No Gender Info"}</p>
                 <p>Price: ${pet.price ? pet.price : "No Price Given"}</p>
-            </div>
+            
             <div class="mt-3 flex justify-center gap-2">
-                <button class="btn like-btn text-[#0e7a81]    hover:bg-[#0e7a81a1]"><i class="fa-solid fa-thumbs-up"></i></button>
-                <button class="btn text-[#0e7a81] font-bold hover:bg-[#0e7a81a1]">Adopt</button>
-                <button class="btn text-[#0e7a81] font-bold hover:bg-[#0e7a81a1]">Details</button>
+                <button class="btn like-btn text-[#0e7a81]  hover:bg-[#0e7a81a1] hover:text-black text-lg"><i class="fa-solid fa-thumbs-up"></i></button>
+                <button class="btn text-[#0e7a81] font-bold hover:bg-[#0e7a81a1] hover:text-black text-lg">Adopt</button>
+                <button class="btn text-[#0e7a81] font-bold hover:bg-[#0e7a81a1] hover:text-black text-lg" onclick="showPetDetails(${pet.petId})">Details</button>
+
+            </div>
+
             </div>
         `;
 
         petsContainer.appendChild(petCard);
 
         // Like Button Functionality
-        // Like Button Functionality
+
         const likeBtn = petCard.querySelector(".like-btn");
         likeBtn.addEventListener("click", () => {
-            // আগের image duplicate হলে add হবে না
+
             if (!petImageContainer.querySelector(`img[src="${pet.image}"]`)) {
                 const imgDiv = document.createElement("div");
                 imgDiv.classList.add("flex", "justify-center");
-                // fixed width + responsive + rounded + shadow
+
                 imgDiv.innerHTML = `
             <img src="${pet.image}" 
                  alt="${pet.breed}" 
-                 class="rounded-lg shadow-lg w-[300px] h-[300px] object-cover md:w-[250px] md:h-[250px] sm:w-[200px] sm:h-[200px]" />
+                 class="rounded-lg shadow-lg w-[300px] h-[300px] object-cover md:w-[250px] md:h-[250px] sm:w-[200px] sm:h-[200px] transition duration-300 hover:-translate-y-2 relative" />
         `;
                 petImageContainer.appendChild(imgDiv);
             }
@@ -118,6 +128,27 @@ shortBtn.addEventListener("click", () => {
 });
 
 loadAllPets();
+
+// Show Pet Details in Modal
+const showPetDetails = async (id) => {
+    const res = await fetch(`https://openapi.programming-hero.com/api/peddy/pet/${id}`);
+    const data = await res.json();
+    const pet = data.petData;
+
+    // Modal elements
+    document.getElementById("modal-name").textContent = pet.breed || "No Name Found";
+    document.getElementById("modal-img").src = pet.image || "";
+    document.getElementById("modal-details").textContent = pet.pet_details || "No Description Found";
+    document.getElementById("modal-breed").textContent = pet.breed || "Unknown";
+    document.getElementById("modal-category").textContent = pet.category || "Unknown";
+    document.getElementById("modal-gender").textContent = pet.gender || "Unknown";
+    document.getElementById("modal-birth").textContent = pet.date_of_birth || "Unknown";
+    document.getElementById("modal-vaccine").textContent = pet.vaccinated_status || "Unknown";
+    document.getElementById("modal-price").textContent = pet.price || "N/A";
+
+    // Show modal
+    document.getElementById("petDetailsModal").showModal();
+};
 
 
 // hamburger
