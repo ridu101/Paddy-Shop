@@ -1,149 +1,129 @@
-// ------------------- Categories ----------------------
+let allPets = [];
+let currentPets = [];
 
+// Load Categories
 const loadCategories = async () => {
     const response = await fetch("https://openapi.programming-hero.com/api/peddy/categories");
     const data = await response.json();
     displayCategories(data.categories);
-}
+};
 
 const displayCategories = (categories) => {
-    const container = document.getElementById("category-container")
-    container.innerHTML = ""
+    const container = document.getElementById("category-container");
+    container.innerHTML = "";
     for (const category of categories) {
-        const div = document.createElement("div")
-
+        const div = document.createElement("div");
         div.innerHTML = `
- <div class="flex items-center justify-between w-full px-16">
-    <img src="${category.category_icon}" alt="" class="w-10 h-10">
-    <button onclick="activateCategory('${category.category}')" 
-        class="category-btn flex items-center gap-2 hover:bg-[#0e7a81a1] rounded-lg font-bold text-xl px-4 py-2">
-        ${category.category}
-    </button>
-</div>
-`
-
+            <button onclick="activateCategory('${category.category}')"
+                class="category-btn flex items-center gap-2 hover:bg-[#0e7a81a1] rounded-lg font-bold text-xl px-4 py-2">
+                <img src="${category.category_icon}" class="w-6 h-6" /> ${category.category}
+            </button>
+        `;
         container.appendChild(div);
     }
-}
-loadCategories()
+};
+loadCategories();
 
-//---------------------------Cards--------------------------------
-
+// Load All Pets
 const loadAllPets = async () => {
     const res = await fetch("https://openapi.programming-hero.com/api/peddy/pets");
     const data = await res.json();
-    allPets = data.pets;       // সব pets
-    currentPets = allPets;     // এখনকার shown pets হলো সব pets
+    allPets = data.pets;
+    currentPets = allPets;
     displayAllPets(currentPets);
-}
+};
 
-
+// Display Pets
 const displayAllPets = (pets) => {
-    const petsContainer = document.getElementById("pets-container")
+    const petsContainer = document.getElementById("pets-container");
     petsContainer.innerHTML = "";
 
     if (!pets || pets.length == 0) {
-        petsContainer.innerHTML = `
-    <div class="p-20 grid justify-center text-center bg-[#d7f0f2a1] rounded-xl shadow-2xl mt-20         
-        mb-20 w-[990px] h-[490px]">
-        <div class="flex mx-auto"> <img class="" src="./images/error.webp" alt=""></div>
-        <h1 class="font-bold text-4xl">No Information Available</h1>
-        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at <br> its layout. The point of using Lorem Ipsum is that it has a.</p>
-
-    </div>`
+        petsContainer.innerHTML = `<p class="text-center text-lg mt-10">No Information Available</p>`;
+        return;
     }
 
-    for (const pet of pets) {
+    const petImageContainer = document.getElementById("pet-image-container");
+
+    pets.forEach((pet) => {
         const petCard = document.createElement("div");
+        petCard.classList.add("p-5", "shadow-xl", "rounded-lg", "border-2", "hover:shadow-2xl", "transition", "duration-300");
         petCard.innerHTML = `
-        <div class="p-5 shadow-xl rounded-lg w-[312px] h-full border-[3px] hover:bg-[#b8e7eaa1]  hover:shadow-xl transition duration-300 hover:-translate-y-2">
-                    <div>
-                        <img class="rounded-lg" src="${pet.image}" alt="">
-                        <h1 class="font-bold text-2xl mt-5 mb-5">${pet.breed ? pet.breed: "No Name Found"}</h1>
-                        <div class="flex items-center space-x-3"><i class="fa-solid fa-table-cells-large"></i> <p>Breed:${pet.breed}</p></div>
-                        <div class="flex items-center space-x-3 "><i class="fa-solid fa-calendar"></i><p>Birth: ${pet.date_of_birth}</p></i></div>
-                        <div class="flex items-center space-x-3"><i class="fa-solid fa-mars-stroke-up"></i><p>Gender:${pet.gender}</p></i></div>
-                        <div class="flex items-center space-x-3"><i class="fa-solid fa-dollar-sign"></i><p>Price: ${pet.price ? pet.price : "No Price Details Given"}</p></i></div>
-                        
-                    </div>
-                   
-                    <div class=" space-x-2 mt-5 flex justify-center">
-                        
-                        <button class="btn like-btn hover:bg-[#0e7a81a1] hover:text-black"><i class="fa-solid fa-thumbs-up"></i></button>
-                        <button class="btn text-[#0e7a81] text-lg font-bold hover:bg-[#0e7a81a1] hover:text-black " > Adopt</button>
-                        <button class="btn text-[#0e7a81] text-lg font-bold hover:bg-[#0e7a81a1] hover:text-black"> Details</button>
-                    </div>
-                 </div>
-        `
-        petsContainer.appendChild(petCard)
+            <div>
+                <img src="${pet.image}" alt="" class="rounded-lg w-full h-48 object-cover">
+                <h1 class="font-bold text-2xl mt-3 mb-3">${pet.breed ? pet.breed : "No Name Found"}</h1>
+                <p>Breed: ${pet.breed ? pet.breed : "No Name Found"}</p>
+                <p>Birth: ${pet.date_of_birth ? pet.date_of_birth : "No Birth Info"}</p>
+                <p>Gender: ${pet.gender ? pet.gender : "No Gender Info"}</p>
+                <p>Price: ${pet.price ? pet.price : "No Price Given"}</p>
+            </div>
+            <div class="mt-3 flex justify-center gap-2">
+                <button class="btn like-btn text-white bg-[#0e7a81] hover:bg-[#0e7a81a1]"><i class="fa-solid fa-thumbs-up"></i></button>
+                <button class="btn text-[#0e7a81] font-bold hover:bg-[#0e7a81a1]">Adopt</button>
+                <button class="btn text-[#0e7a81] font-bold hover:bg-[#0e7a81a1]">Details</button>
+            </div>
+        `;
 
-        // ------------ Pet Image Show Functionality-----------------
+        petsContainer.appendChild(petCard);
 
-        const likeButtons = document.querySelectorAll('.like-btn');
-        const petContainer = document.getElementById('pet-image-container');
+        // Like Button Functionality
+        // Like Button Functionality
+        const likeBtn = petCard.querySelector(".like-btn");
+        likeBtn.addEventListener("click", () => {
+            // আগের image duplicate হলে add হবে না
+            if (!petImageContainer.querySelector(`img[src="${pet.image}"]`)) {
+                const imgDiv = document.createElement("div");
+                imgDiv.classList.add("flex", "justify-center");
+                // fixed width + responsive + rounded + shadow
+                imgDiv.innerHTML = `
+            <img src="${pet.image}" 
+                 alt="${pet.breed}" 
+                 class="rounded-lg shadow-lg w-[300px] h-[300px] object-cover md:w-[250px] md:h-[250px] sm:w-[200px] sm:h-[200px]" />
+        `;
+                petImageContainer.appendChild(imgDiv);
+            }
+        });
 
-        let i = 0;
-        for (const button of likeButtons) {
-            const pet = pets[i];
+    });
+};
 
-            button.addEventListener('click', () => {
-                // চেক করা হচ্ছে এই pet আগে থেকে আছে কি না
-                const alreadyAdded = petContainer.querySelector(`img[src="${pet.image}"]`);
-
-                if (!alreadyAdded) {
-                    // যদি না থাকে, তখন যোগ করো
-                    petContainer.innerHTML += `
-                <div class="flex justify-center ">
-                    <img src="${pet.image}" alt="Liked Pet" class="rounded-lg shadow-lg w-[300px]" />
-                </div>
-            `;
-                }
-            });
-
-            i++;
-        }
-
-    }
-}
-loadAllPets()
-
-// -----------------------load specific pets --------------
-
+// Load Specific Category
 const loadSpecificPets = async (categoryName) => {
     const response = await fetch(`https://openapi.programming-hero.com/api/peddy/category/${categoryName}`);
     const data = await response.json();
-    currentPets = data.data;   // এখনকার shown pets হলো শুধু selected category
+    currentPets = data.data;
     displayAllPets(currentPets);
-}
+};
 
-// -------------- Active Class Functionality ------------------
+// Active Category
 function activateCategory(categoryName) {
-    document.querySelectorAll('.category-btn').forEach(btn => {
-        btn.classList.remove('active-category');
-        btn.style.backgroundColor = '';
+    document.querySelectorAll(".category-btn").forEach(btn => {
+        btn.classList.remove("active-category");
+        btn.style.backgroundColor = "";
     });
-
-    const activeBtn = Array.from(document.querySelectorAll('.category-btn'))
+    const activeBtn = Array.from(document.querySelectorAll(".category-btn"))
         .find(btn => btn.textContent.trim() === categoryName);
-
     if (activeBtn) {
-        activeBtn.classList.add('active-category');
-        activeBtn.style.backgroundColor = '#0e7a81';
+        activeBtn.classList.add("active-category");
+        activeBtn.style.backgroundColor = "#0e7a81";
     }
-
     loadSpecificPets(categoryName);
 }
 
-// short button functionality 
-
-
-
+// Sort By Price
 const shortBtn = document.getElementById("shot-btn");
-let allPets = [];      // সব pets
-let currentPets = [];  // এখনকার দেখানো pets (active category / all)
-
-shortBtn.addEventListener('click', () => {
-    // currentPets অনুযায়ী sort
+shortBtn.addEventListener("click", () => {
     const sortedPets = [...currentPets].sort((a, b) => a.price - b.price);
     displayAllPets(sortedPets);
+});
+
+loadAllPets();
+
+
+// hamburger
+const menuToggle = document.getElementById('menu-toggle');
+const menu = document.getElementById('menu');
+
+menuToggle.addEventListener('click', () => {
+  menu.classList.toggle('hidden');
 });
