@@ -18,7 +18,7 @@
 
 <body>
     <header>
-       
+
         <!-- Fixed Navbar with solid background -->
         <nav
             class="fixed top-0 left-0 w-full flex flex-col md:flex-row justify-between p-5 md:p-5 bg-[#9adfe3] font-semibold text-lg z-50 shadow-lg">
@@ -30,9 +30,11 @@
                 </div>
 
                 <!-- Hamburger icon (only on mobile) -->
-                <button id="menu-toggle" class="md:hidden text-2xl focus:outline-none">
+                <button id="menu-toggle" type="button" aria-label="Open menu"
+                    class="md:hidden text-2xl focus:outline-none">
                     <i class="fa-solid fa-bars"></i>
                 </button>
+
             </div>
 
             <!-- Navigation links -->
@@ -60,11 +62,15 @@
         </section>
 
         <section class="text-center mt-10 px-5 md:px-0">
-            <h1 class="font-bold text-3xl md:text-4xl">Want To Adopt Your <span class="text-[#0e7a81]">Best Friend?</span></h1>
+            <h1 class="font-bold text-3xl md:text-4xl">Want To Adopt Your <span class="text-[#0e7a81]">Best
+                    Friend?</span></h1>
             <p class="text-gray-500 text-md md:text-lg mt-2">It is a long established fact that a reader will be
                 distracted by the <br> readable content of a page when looking at its layout.</p>
-            <button class="btn bg-[#9adfe3] hover:bg-[#0e7a81a1] h-[56px] w-[160px] mt-5 text-lg font-bold"><a
-                    href="#main">View More</a></button>
+            <a href="#main"
+                class="btn bg-[#9adfe3] hover:bg-[#0e7a81a1] h-[56px] w-[160px] mt-5 text-lg font-bold inline-flex justify-center items-center">
+                View More
+            </a>
+
         </section>
     </header>
 
@@ -80,7 +86,7 @@
 
         <!-- Short By Price Button -->
         <section class="mb-5 flex justify-end">
-            <button id="shot-btn" class="btn font-bold text-xl bg-[#9adfe3] hover:bg-[#0e7a81a1]">
+            <button id="shot-btn" type="button" class="btn font-bold text-xl bg-[#9adfe3] hover:bg-[#0e7a81a1]">
                 Short By Price
             </button>
         </section>
@@ -113,7 +119,7 @@
                 </ul>
             </div>
             <form method="dialog" class="modal-backdrop">
-                <button>Close</button>
+                <button type="button">Close</button>
             </form>
         </dialog>
     </main>
@@ -155,7 +161,7 @@
                 <div class="grid space-y-3">
                     <input type="text" placeholder="Enter your email"
                         class="input input-info bg-black border-gray-600 w-full max-w-xs mx-auto md:mx-0" />
-                    <button
+                    <button type="button"
                         class="btn bg-[#0e7a81] hover:bg-[#0e7a81a1] border-none font-bold text-white rounded-xl w-full max-w-xs mx-auto md:mx-0">
                         Subscribe
                     </button>
