@@ -39,16 +39,21 @@ const displayAllPets = (pets) => {
     petsContainer.innerHTML = "";
 
     if (!pets || pets.length == 0) {
-        petsContainer.innerHTML = `  <div class="grid p-20 text-center space-y-5 bg-[#b6e0e3a1] w-[900px] hover:bg-[#0e7a81a1]  container mx-auto rounded-2xl shadow-2xl ">
-            <img class="mx-auto" src="./images/error.webp" alt="">
-            <h1 class="font-bold text-4xl ">No Information Available</h1>
-            <p>It is a long established fact that a reader will be distracted by the readable content of a page when
-                looking at <br>
-                its layout. The point of using Lorem Ipsum is that it has a.</p>
-
+    petsContainer.innerHTML = `
+        <div class="grid p-8 sm:p-10 md:p-16 lg:p-20 text-center space-y-5 
+                    bg-[#b6e0e3a1] w-[90%] sm:w-[80%] md:w-[700px] lg:w-[900px] 
+                    hover:bg-[#a0c8cba1] mx-auto rounded-2xl shadow-2xl transition-all duration-300">
+            <img class="mx-auto w-32 sm:w-40 md:w-48 lg:w-56" src="./images/error.webp" alt="Error Image">
+            <h1 class="font-bold text-2xl sm:text-3xl md:text-4xl text-[#0e7a81]">No Information Available</h1>
+            <p class="text-sm sm:text-base md:text-lg text-gray-700 leading-relaxed">
+                It is a long established fact that a reader will be distracted by the readable content of a page 
+                when looking at its layout. <br class="hidden sm:block">
+                The point of using Lorem Ipsum is that it has a.
+            </p>
         </div>`;
-        return;
-    }
+    return;
+}
+
     // pet image container 
     const petImageContainer = document.getElementById("pet-image-container");
 
