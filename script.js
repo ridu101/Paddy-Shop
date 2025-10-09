@@ -30,12 +30,13 @@ loadCategories()
 //---------------------------Cards--------------------------------
 
 const loadAllPets = async () => {
-    const res = await fetch("https://openapi.programming-hero.com/api/peddy/pets")
-    const data = await res.json()
-    displayAllPets(data.pets)
-
-
+    const res = await fetch("https://openapi.programming-hero.com/api/peddy/pets");
+    const data = await res.json();
+    allPets = data.pets;       // সব pets
+    currentPets = allPets;     // এখনকার shown pets হলো সব pets
+    displayAllPets(currentPets);
 }
+
 
 const displayAllPets = (pets) => {
     const petsContainer = document.getElementById("pets-container")
@@ -58,11 +59,11 @@ const displayAllPets = (pets) => {
         <div class="p-5 shadow-xl rounded-lg w-[312px] h-full border-[3px] hover:bg-[#b8e7eaa1]  hover:shadow-xl transition duration-300 hover:-translate-y-2">
                     <div>
                         <img class="rounded-lg" src="${pet.image}" alt="">
-                        <h1 class="font-bold text-2xl mt-5 mb-5">${pet.breed}</h1>
+                        <h1 class="font-bold text-2xl mt-5 mb-5">${pet.breed ? pet.breed: "No Name Found"}</h1>
                         <div class="flex items-center space-x-3"><i class="fa-solid fa-table-cells-large"></i> <p>Breed:${pet.breed}</p></div>
                         <div class="flex items-center space-x-3 "><i class="fa-solid fa-calendar"></i><p>Birth: ${pet.date_of_birth}</p></i></div>
                         <div class="flex items-center space-x-3"><i class="fa-solid fa-mars-stroke-up"></i><p>Gender:${pet.gender}</p></i></div>
-                        <div class="flex items-center space-x-3"><i class="fa-solid fa-dollar-sign"></i><p>Price: ${pet.price}</p></i></div>
+                        <div class="flex items-center space-x-3"><i class="fa-solid fa-dollar-sign"></i><p>Price: ${pet.price ? pet.price : "No Price Details Given"}</p></i></div>
                         
                     </div>
                    
@@ -92,7 +93,7 @@ const displayAllPets = (pets) => {
                 if (!alreadyAdded) {
                     // যদি না থাকে, তখন যোগ করো
                     petContainer.innerHTML += `
-                <div class="flex justify-center mt-5">
+                <div class="flex justify-center ">
                     <img src="${pet.image}" alt="Liked Pet" class="rounded-lg shadow-lg w-[300px]" />
                 </div>
             `;
@@ -108,10 +109,11 @@ loadAllPets()
 
 // -----------------------load specific pets --------------
 
-const loadSpecificPets = async (name) => {
-    const response = await fetch(`https://openapi.programming-hero.com/api/peddy/category/${name}`)
+const loadSpecificPets = async (categoryName) => {
+    const response = await fetch(`https://openapi.programming-hero.com/api/peddy/category/${categoryName}`);
     const data = await response.json();
-    displayAllPets(data.data)
+    currentPets = data.data;   // এখনকার shown pets হলো শুধু selected category
+    displayAllPets(currentPets);
 }
 
 // -------------- Active Class Functionality ------------------
@@ -131,3 +133,17 @@ function activateCategory(categoryName) {
 
     loadSpecificPets(categoryName);
 }
+
+// short button functionality 
+
+
+
+const shortBtn = document.getElementById("shot-btn");
+let allPets = [];      // সব pets
+let currentPets = [];  // এখনকার দেখানো pets (active category / all)
+
+shortBtn.addEventListener('click', () => {
+    // currentPets অনুযায়ী sort
+    const sortedPets = [...currentPets].sort((a, b) => a.price - b.price);
+    displayAllPets(sortedPets);
+});
