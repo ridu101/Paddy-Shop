@@ -58,7 +58,7 @@ const displayAllPets = (pets) => {
                 <p>Price: ${pet.price ? pet.price : "No Price Given"}</p>
             </div>
             <div class="mt-3 flex justify-center gap-2">
-                <button class="btn like-btn text-white bg-[#0e7a81] hover:bg-[#0e7a81a1]"><i class="fa-solid fa-thumbs-up"></i></button>
+                <button class="btn like-btn text-[#0e7a81]    hover:bg-[#0e7a81a1]"><i class="fa-solid fa-thumbs-up"></i></button>
                 <button class="btn text-[#0e7a81] font-bold hover:bg-[#0e7a81a1]">Adopt</button>
                 <button class="btn text-[#0e7a81] font-bold hover:bg-[#0e7a81a1]">Details</button>
             </div>
@@ -125,5 +125,5 @@ const menuToggle = document.getElementById('menu-toggle');
 const menu = document.getElementById('menu');
 
 menuToggle.addEventListener('click', () => {
-  menu.classList.toggle('hidden');
+    menu.classList.toggle('hidden');
 });

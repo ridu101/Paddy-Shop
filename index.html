@@ -18,32 +18,34 @@
 
 <body>
     <header>
-        <nav class="flex flex-col md:flex-row justify-between p-5 md:p-10 bg-[#0e7a81a1] font-semibold text-lg relative">
-    <!-- Logo + Hamburger -->
-    <div class="flex justify-between items-center">
-        <div class="flex space-x-2 items-center">
-            <img src="./images/logo.webp" alt="" class="w-10 h-10">
-            <p>Peddy</p>
-        </div>
+        <nav
+            class="flex flex-col md:flex-row justify-between p-5 md:p-10 bg-[#0e7a81a1] font-semibold text-lg relative">
+            <!-- Logo + Hamburger -->
+            <div class="flex justify-between items-center">
+                <div class="flex space-x-2 items-center">
+                    <img src="./images/logo.webp" alt="" class="w-10 h-10">
+                    <p>Peddy</p>
+                </div>
 
-        <!-- Hamburger icon (only on mobile) -->
-        <button id="menu-toggle" class="md:hidden text-2xl focus:outline-none">
-            <i class="fa-solid fa-bars"></i>
-        </button>
-    </div>
+                <!-- Hamburger icon (only on mobile) -->
+                <button id="menu-toggle" class="md:hidden text-2xl focus:outline-none">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
 
-    <!-- Navigation links -->
-    <div id="menu" class="hidden sm:flex-col md:flex md:flex-row space-y-3 md:space-y-0 md:space-x-5 mt-3 md:mt-0 ">
-        <a class="hover:bg-[#0e7a81] p-2 hover:text-white rounded-lg" href="#">Home</a>
-        <a class="hover:bg-[#0e7a81] p-2 hover:text-white rounded-lg" href="#">Shop</a>
-        <a class="hover:bg-[#0e7a81] p-2 hover:text-white rounded-lg" href="#">Contact</a>
-    </div>
+            <!-- Navigation links -->
+            <div id="menu"
+                class="hidden sm:flex-col md:flex md:flex-row space-y-3 md:space-y-0 md:space-x-5 mt-3 md:mt-0 ">
+                <a class="hover:bg-[#0e7a81] p-2 hover:text-white rounded-lg" href="#">Home</a>
+                <a class="hover:bg-[#0e7a81] p-2 hover:text-white rounded-lg" href="#">Shop</a>
+                <a class="hover:bg-[#0e7a81] p-2 hover:text-white rounded-lg" href="#">Contact</a>
+            </div>
 
-    <!-- User icon -->
-    <div class="hidden md:flex justify-end">
-        <i class="fa-solid fa-user text-xl"></i>
-    </div>
-</nav>
+            <!-- User icon -->
+            <div class="hidden md:flex justify-end">
+                <i class="fa-solid fa-user text-xl"></i>
+            </div>
+        </nav>
 
 
         <!-- banner section -->
@@ -65,7 +67,9 @@
     </header>
 
     <main class="container mx-auto px-5 md:px-0 mt-10">
-        <h1 class="font-bold text-3xl md:text-4xl mb-10 text-center">Best Deal For You Below</h1>
+        <h1 class="font-bold text-3xl md:text-4xl mb-10 text-center">
+            Best Deal For You Below
+        </h1>
 
         <!-- Category Section -->
         <section class="mb-5">
@@ -74,18 +78,23 @@
 
         <!-- Short By Price Button -->
         <section class="mb-5 flex justify-end">
-            <button id="shot-btn" class="btn font-bold text-xl bg-[#0e7a81] hover:bg-[#0e7a81a1]">Short By Price</button>
+            <button id="shot-btn" class="btn font-bold text-xl bg-[#0e7a81] hover:bg-[#0e7a81a1]">
+                Short By Price
+            </button>
         </section>
 
         <!-- Pets Section -->
         <section class="flex flex-col lg:flex-row gap-5">
             <!-- Pets Container -->
-            <div id="pets-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 w-full lg:w-3/4"></div>
+            <div id="pets-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 w-full lg:w-3/4">
+            </div>
 
             <!-- Liked Pet Images -->
-            <div id="pet-image-container" class="flex flex-wrap gap-3 w-full lg:w-1/4"></div>
+            <div id="pet-image-container" class="flex flex-wrap justify-center lg:justify-start gap-3 w-full lg:w-1/4">
+            </div>
         </section>
     </main>
+
 
     <footer class="mt-10 bg-black text-white px-5 md:px-20 py-10">
         <div class="flex flex-col md:flex-row justify-between space-y-10 md:space-y-0 md:space-x-10">
