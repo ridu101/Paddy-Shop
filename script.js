@@ -44,7 +44,7 @@ const displayAllPets = (pets) => {
     for (const pet of pets) {
         const petCard = document.createElement("div");
         petCard.innerHTML = `
-        <div class="p-5 shadow-xl rounded-lg w-[312px] h-full border-[3px]">
+        <div class="p-5 shadow-xl rounded-lg w-[312px] h-full border-[3px] hover:bg-[#b8e7eaa1]  hover:shadow-xl transition duration-300 hover:-translate-y-2">
                     <div>
                         <img class="rounded-lg" src="${pet.image}" alt="">
                         <h1 class="font-bold text-2xl mt-5 mb-5">${pet.breed}</h1>
