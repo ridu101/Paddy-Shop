@@ -158,3 +158,12 @@ const menu = document.getElementById('menu');
 menuToggle.addEventListener('click', () => {
     menu.classList.toggle('hidden');
 });
+
+const viewMoreBtn = document.querySelector('a[href="#main"]');
+const mainSection = document.getElementById("main");
+
+viewMoreBtn.onclick = (e) => {
+    e.preventDefault();
+    mainSection.classList.remove("hidden");
+    mainSection.scrollIntoView({ behavior: "smooth" });
+};
