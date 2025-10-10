@@ -157,32 +157,41 @@ const showPetDetails = async (id) => {
 
 // adopt button functionality
 const showCountDown = async (id) => {
-    const res = await fetch(`https://openapi.programming-hero.com/api/peddy/pet/${id}`);
-    const data = await res.json();
-    const pet = data.petData;
+  // modal ওপেন
+  const modal = document.getElementById("adoptModal");
+  const countdownValue = document.getElementById("countdown-value");
+  const countdownContainer = document.getElementById("countdown-container");
+  const successMessage = document.getElementById("success-message");
 
-    // modal খুলবে
-    const modal = document.getElementById("adoptModal");
-    const countdownValue = document.getElementById("countdown-value");
-    modal.showModal();
+  modal.showModal();
 
-    // শুরুতে মান 3
-    let timeLeft = 3;
+  // শুরু মান 3
+  let timeLeft = 3;
+  countdownValue.style.setProperty("--value", timeLeft);
+
+  // reset states
+  countdownContainer.classList.remove("hidden");
+  successMessage.classList.add("hidden");
+
+  // প্রতি ১ সেকেন্ডে কমবে
+  const timer = setInterval(() => {
+    timeLeft--;
     countdownValue.style.setProperty("--value", timeLeft);
 
-    // প্রতি 1 সেকেন্ডে কাউন্ট কমবে
-    const timer = setInterval(() => {
-        timeLeft--;
-        countdownValue.style.setProperty("--value", timeLeft);
+    if (timeLeft <= 0) {
+      clearInterval(timer);
 
-        if (timeLeft <= 0) {
-            clearInterval(timer);
-            modal.close(); // modal বন্ধ হবে
-           
-        }
-    }, 1000);
+      // countdown hide করে success দেখাও
+      countdownContainer.classList.add("hidden");
+      successMessage.classList.remove("hidden");
+
+      // ২ সেকেন্ড পর modal বন্ধ হবে
+      setTimeout(() => {
+        modal.close();
+      }, 2000);
+    }
+  }, 1000);
 };
-
 
 // hamburger
 const menuToggle = document.getElementById('menu-toggle');

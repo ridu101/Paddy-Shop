@@ -130,19 +130,32 @@
 
 
         <!-- Adopt Countdown Modal -->
-        <dialog id="adoptModal" class="modal modal-bottom sm:modal-middle">
-            <div class="modal-box text-center">
-                <h3 class="text-2xl font-bold text-[#0e7a81] mb-3">Adoption in progress...</h3>
-                <span class="countdown font-mono text-6xl text-[#0e7a81]">
-                    <span id="countdown-value" style="--value:3;">3</span>
-                </span>
-                <div class="modal-action justify-center mt-4">
-                    <form method="dialog">
-                        <button class="btn bg-[#0e7a81] text-white hover:bg-[#0e7a81a1]">Close</button>
-                    </form>
-                </div>
-            </div>
-        </dialog>
+
+     <!-- Modal -->
+<dialog id="adoptModal" class="modal">
+  <div class="modal-box text-center">
+    <h3 class="text-lg font-bold mb-4">Adoption Process</h3>
+
+    <!-- Countdown -->
+    <div id="countdown-container">
+      <span class="countdown font-mono text-5xl">
+        <span id="countdown-value" style="--value:3;"></span>
+      </span>
+    </div>
+
+    <!-- Success Message (hidden initially) -->
+    <div id="success-message" class="hidden mt-4">
+        
+      <h3 class="text-green-500 text-4xl font-bold">🎉 Adoption Successful!</h3>
+    </div>
+
+    <div class="modal-action justify-center mt-6">
+      <form method="dialog">
+        <button class="btn">Close</button>
+      </form>
+    </div>
+  </div>
+</dialog>
 
     </main>
 
