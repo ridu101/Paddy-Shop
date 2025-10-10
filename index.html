@@ -124,38 +124,36 @@
                 </div>
             </div>
             <form method="dialog" class="modal-backdrop">
-                <button>close</button>
+                <button  class="">close</button>
             </form>
         </dialog>
 
 
         <!-- Adopt Countdown Modal -->
+        <dialog id="adoptModal" class="modal">
+            <div class="modal-box text-center">
+                <h3 class=" font-bold mb-4 text-[#0e7a81] text-2xl">Adoption Process</h3>
 
-     <!-- Modal -->
-<dialog id="adoptModal" class="modal">
-  <div class="modal-box text-center">
-    <h3 class="text-lg font-bold mb-4">Adoption Process</h3>
+                <!-- Countdown -->
+                <div id="countdown-container">
+                    <span class="countdown font-mono text-5xl">
+                        <span id="countdown-value"></span>
+                    </span>
+                </div>
 
-    <!-- Countdown -->
-    <div id="countdown-container">
-      <span class="countdown font-mono text-5xl">
-        <span id="countdown-value" style="--value:3;"></span>
-      </span>
-    </div>
+                <!-- Success Message (hidden initially) -->
+                <div id="success-message" class="hidden mt-4">
+                    <i class="fa-regular fa-circle-check text-green-400 text-4xl"></i>
+                    <h3 class="text-green-500 text-3xl font-bold">🎉 Adoption Successful!</h3>
+                </div>
 
-    <!-- Success Message (hidden initially) -->
-    <div id="success-message" class="hidden mt-4">
-        
-      <h3 class="text-green-500 text-4xl font-bold">🎉 Adoption Successful!</h3>
-    </div>
-
-    <div class="modal-action justify-center mt-6">
-      <form method="dialog">
-        <button class="btn">Close</button>
-      </form>
-    </div>
-  </div>
-</dialog>
+                <div class="modal-action justify-center mt-6">
+                    <form method="dialog">
+                        <button type="button" class="btn bg-[#9adfe3] hover:bg-[#0e7a81a1]">Close</button>
+                    </form>
+                </div>
+            </div>
+        </dialog>
 
     </main>
 
