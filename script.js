@@ -155,6 +155,14 @@ const showPetDetails = async (id) => {
     document.getElementById("petDetailsModal").showModal();
 };
 
+// adopt button functionality
+const showCountDown = async (id) => {
+    const res = await fetch(`https://openapi.programming-hero.com/api/peddy/pet/${id}`);
+    const data = await res.json();
+    const pet = data.petData;
+
+  
+}
 
 // hamburger
 const menuToggle = document.getElementById('menu-toggle');

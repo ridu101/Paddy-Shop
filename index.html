@@ -105,7 +105,7 @@
 
         <!-- Pet Details Modal -->
         <dialog id="petDetailsModal" class="modal">
-            <div class="modal-box space-y-3 ">
+            <div class="modal-box space-y-3">
                 <h3 id="modal-name" class="text-2xl font-bold text-[#0e7a81]"></h3>
                 <img id="modal-img" class="w-full h-64 object-cover rounded-lg" />
                 <p id="modal-details" class="text-gray-700"></p>
@@ -117,17 +117,38 @@
                     <li><b>Vaccinated:</b> <span id="modal-vaccine"></span></li>
                     <li><b>Price:</b> $<span id="modal-price"></span></li>
                 </ul>
+                <div class="modal-action">
+                    <form method="dialog">
+
+                    </form>
+                </div>
             </div>
             <form method="dialog" class="modal-backdrop">
-                <button type="button">Close</button>
+                <button>close</button>
             </form>
+        </dialog>
+        <!-- adopt button modal -->
+
+        <button class="btn" onclick="my_modal_5.showModal()">open modal</button>
+        <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+            <div class="modal-box">
+                <span class="countdown font-mono text-6xl">
+                    <span style="--value:59;" aria-live="polite" aria-label="59">59</span>
+                </span>
+                <div class="modal-action">
+                    <form method="dialog">
+                        <!-- if there is a button in form, it will close the modal -->
+                        <button class="btn">Close</button>
+                    </form>
+                </div>
+            </div>
         </dialog>
     </main>
 
     <footer class="mt-10 bg-black text-white px-5 md:px-20 py-10 ">
         <div class="flex flex-col md:flex-row justify-between space-y-10 md:space-y-0 md:space-x-10 container mx-auto">
             <div class="space-y-5 text-center md:text-left">
-                <div class="flex justify-center md:justify-start items-center space-x-2">
+                <div class="flex justify-center md:justify-start  items-center space-x-2">
                     <img src="./images/logo.webp" alt="" class="w-10 h-10">
                     <p class="font-bold text-2xl">Peddy</p>
                 </div>
