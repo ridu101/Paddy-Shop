@@ -39,7 +39,7 @@ const displayAllPets = (pets) => {
     petsContainer.innerHTML = "";
 
     if (!pets || pets.length == 0) {
-    petsContainer.innerHTML = `
+        petsContainer.innerHTML = `
         <div class="grid p-8 sm:p-10 md:p-16 lg:p-20 text-center space-y-5 
                     bg-[#b6e0e3a1] w-[90%] sm:w-[80%] md:w-[700px] lg:w-[900px] 
                     hover:bg-[#a0c8cba1] mx-auto rounded-2xl shadow-2xl transition-all duration-300">
@@ -51,8 +51,8 @@ const displayAllPets = (pets) => {
                 The point of using Lorem Ipsum is that it has a.
             </p>
         </div>`;
-    return;
-}
+        return;
+    }
 
     // pet image container 
     const petImageContainer = document.getElementById("pet-image-container");
@@ -71,7 +71,7 @@ const displayAllPets = (pets) => {
             
             <div class="mt-3 flex justify-center gap-2">
                 <button class="btn like-btn text-[#0e7a81]  hover:bg-[#0e7a81a1] hover:text-black text-lg"><i class="fa-solid fa-thumbs-up"></i></button>
-                <button class="btn text-[#0e7a81] font-bold hover:bg-[#0e7a81a1] hover:text-black text-lg">Adopt</button>
+                <button class="btn text-[#0e7a81] font-bold hover:bg-[#0e7a81a1] hover:text-black text-lg" onclick="showCountDown(${pet.petId})">Adopt</button>
                 <button class="btn text-[#0e7a81] font-bold hover:bg-[#0e7a81a1] hover:text-black text-lg" onclick="showPetDetails(${pet.petId})">Details</button>
 
             </div>
@@ -161,8 +161,28 @@ const showCountDown = async (id) => {
     const data = await res.json();
     const pet = data.petData;
 
-  
-}
+    // modal খুলবে
+    const modal = document.getElementById("adoptModal");
+    const countdownValue = document.getElementById("countdown-value");
+    modal.showModal();
+
+    // শুরুতে মান 3
+    let timeLeft = 3;
+    countdownValue.style.setProperty("--value", timeLeft);
+
+    // প্রতি 1 সেকেন্ডে কাউন্ট কমবে
+    const timer = setInterval(() => {
+        timeLeft--;
+        countdownValue.style.setProperty("--value", timeLeft);
+
+        if (timeLeft <= 0) {
+            clearInterval(timer);
+            modal.close(); // modal বন্ধ হবে
+           
+        }
+    }, 1000);
+};
+
 
 // hamburger
 const menuToggle = document.getElementById('menu-toggle');
