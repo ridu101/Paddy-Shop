@@ -157,7 +157,7 @@ const showPetDetails = async (id) => {
 
 // adopt button functionality
 const showCountDown = async (id) => {
-  // modal ওপেন
+
   const modal = document.getElementById("adoptModal");
   const countdownValue = document.getElementById("countdown-value");
   const countdownContainer = document.getElementById("countdown-container");
@@ -165,15 +165,15 @@ const showCountDown = async (id) => {
 
   modal.showModal();
 
-  // শুরু মান 3
+
   let timeLeft = 3;
   countdownValue.style.setProperty("--value", timeLeft);
 
-  // reset states
+
   countdownContainer.classList.remove("hidden");
   successMessage.classList.add("hidden");
 
-  // প্রতি ১ সেকেন্ডে কমবে
+  
   const timer = setInterval(() => {
     timeLeft--;
     countdownValue.style.setProperty("--value", timeLeft);
@@ -181,7 +181,7 @@ const showCountDown = async (id) => {
     if (timeLeft <= 0) {
       clearInterval(timer);
 
-      // countdown hide করে success দেখাও
+    
       countdownContainer.classList.add("hidden");
       successMessage.classList.remove("hidden");
 
